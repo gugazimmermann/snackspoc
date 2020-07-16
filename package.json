@@ -5,19 +5,54 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "prettier": "npx prettier --write 'src/**/*.{js,jsx}'",
+    "lint": "npx eslint 'src/**/*.{js,jsx}' --quiet"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "dependencies": {
+    "@expo-google-fonts/ubuntu": "^0.1.0",
+    "@expo/vector-icons": "^10.2.0",
+    "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/drawer": "^5.8.5",
+    "@react-navigation/material-top-tabs": "^5.2.13",
+    "@react-navigation/native": "^5.7.0",
+    "@react-navigation/stack": "^5.7.0",
     "expo": "~38.0.8",
+    "expo-constants": "^9.1.1",
     "expo-status-bar": "^1.0.2",
+    "prop-types": "^15.7.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-    "react-native-web": "~0.11.7"
+    "react-native-appearance": "^0.3.4",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-paper": "^4.0.0",
+    "react-native-reanimated": "~1.9.0",
+    "react-native-safe-area-context": "~3.0.7",
+    "react-native-screens": "~2.9.0",
+    "react-native-tab-view": "^2.15.0",
+    "react-native-web": "~0.11.7",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0"
+    "babel-preset-expo": "~8.1.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "husky": "^4.2.5",
+    "prettier": "2.0.5",
+    "pretty-quick": "^2.0.1"
   },
   "private": true
 }

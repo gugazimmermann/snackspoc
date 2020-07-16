@@ -2,20 +2,19 @@
   "expo": {
     "name": "snackspoc",
     "slug": "snackspoc",
-    "version": "1.0.0",
+    "scheme": "snackspoc",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#009688"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
