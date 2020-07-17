@@ -23,7 +23,7 @@ export default function HomeNavigation() {
       }}
     >
       <Stack.Screen
-        name='Statements'
+        name='Balance'
         component={HomeTabsNav}
         options={({ route }) => {
           const routeName = route.state

@@ -40,6 +40,9 @@ const getStyles = (theme) =>
     signup: {
       backgroundColor: theme.colors.accent,
     },
+    banner: {
+      width: 200,
+    },
   });
 
 export default getStyles;

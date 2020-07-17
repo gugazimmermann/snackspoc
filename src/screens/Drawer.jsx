@@ -20,6 +20,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AuthContext } from '../context/AuthContext';
 import getStyles from '../styles/drawer';
 
+const avatar = require('../../assets/avatar/josesilva.png');
+
 const DrawerScreen = (props) => {
   const theme = useTheme();
   const styles = getStyles(theme);
@@ -30,10 +32,7 @@ const DrawerScreen = (props) => {
       <View style={styles.drawerContent}>
         <View>
           <View style={styles.userInfoSection}>
-            <Avatar.Image
-              source={require('../../assets/avatar/josesilva.png')}
-              size={50}
-            />
+            <Avatar.Image source={avatar} size={50} />
             <Title style={styles.title}>{user.name}</Title>
             <Caption style={styles.caption}>{user.email}</Caption>
             <View style={styles.row}>

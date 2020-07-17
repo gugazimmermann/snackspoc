@@ -29,7 +29,7 @@ export default function MainNavigation() {
   const [themeType, setThemeType] = useState(
     colorScheme === 'dark' ? 'dark' : 'light'
   );
-  const [auth, setAuth] = useState();
+  const [user, setUser] = useState(state.user);
 
   const setStorageThemeType = async (t) => {
     try {
@@ -68,11 +68,11 @@ export default function MainNavigation() {
   function signIn() {
     const currentUser = currentUserInfo();
     dispatch({ type: 'LOGIN', payload: currentUser });
-    setAuth(true);
+    setUser(true);
   }
 
   function signOut() {
-    setAuth();
+    setUser();
     dispatch({ type: 'LOGIN', payload: {} });
   }
 
@@ -92,7 +92,7 @@ export default function MainNavigation() {
         translucent={false}
       />
       <NavigationContainer theme={theme(themeType)}>
-        {auth ? (
+        {user ? (
           <AppNav toggleTheme={toggleThemeType} signOut={signOut} />
         ) : (
           <AuthNav signIn={signIn} />

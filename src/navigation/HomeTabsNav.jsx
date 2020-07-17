@@ -1,20 +1,30 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme, Colors } from 'react-native-paper';
 import { FontAwesome5 as FA5 } from '@expo/vector-icons';
-import Statements from '../screens/Statements';
+import Balance from '../screens/Balance';
 import Promotions from '../screens/Promotions';
 import Stores from '../screens/Stores';
 import Social from '../screens/Social';
 
-const Tab = createMaterialTopTabNavigator();
+const { Navigator, Screen } = createMaterialTopTabNavigator();
 
-export default function HomeTabsNav() {
+export default function HomeTabsNav({ navigation }) {
   const theme = useTheme();
+
+  let bannerNum = Math.floor(Math.random() * Math.floor(8));
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', () => {
+      bannerNum = Math.floor(Math.random() * Math.floor(8));
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
-    <Tab.Navigator
-      initialRouteName='Statements'
+    <Navigator
+      initialRouteName='Balance'
       tabBarPosition='bottom'
       lazy
       tabBarOptions={{
@@ -24,11 +34,6 @@ export default function HomeTabsNav() {
         showLabel: false,
         style: {
           backgroundColor: theme.colors.primary,
-          shadowColor: Colors.black,
-          shadowOffset: { width: 0, height: -3 },
-          shadowOpacity: 0.13,
-          shadowRadius: 5,
-          elevation: 3,
         },
         indicatorStyle: {
           top: 0,
@@ -36,17 +41,18 @@ export default function HomeTabsNav() {
         },
       }}
     >
-      <Tab.Screen
-        name='Statements'
-        component={Statements}
+      <Screen
+        name='Balance'
         options={{
-          tabBarLabel: 'Statements',
+          tabBarLabel: 'Balance',
           tabBarIcon: ({ color }) => (
             <FA5 name='list-ol' size={22} color={color} />
           ),
         }}
-      />
-      <Tab.Screen
+      >
+        {(props) => <Balance {...props} bannerNum={bannerNum} />}
+      </Screen>
+      <Screen
         name='Promotions'
         component={Promotions}
         options={{
@@ -56,7 +62,7 @@ export default function HomeTabsNav() {
           ),
         }}
       />
-      <Tab.Screen
+      <Screen
         name='Stores'
         component={Stores}
         options={{
@@ -66,7 +72,7 @@ export default function HomeTabsNav() {
           ),
         }}
       />
-      <Tab.Screen
+      <Screen
         name='Social'
         component={Social}
         options={{
@@ -76,6 +82,6 @@ export default function HomeTabsNav() {
           ),
         }}
       />
-    </Tab.Navigator>
+    </Navigator>
   );
 }
