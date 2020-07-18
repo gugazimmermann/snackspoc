@@ -1,7 +1,9 @@
+/* eslint-disable global-require */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, Text, Avatar } from 'react-native-paper';
+import { uriPath } from '../utils/keys';
 
 const styles = StyleSheet.create({
   item: {
@@ -16,10 +18,9 @@ const styles = StyleSheet.create({
 
 export default function Store({ store }) {
   const s = store.item;
-  console.log(s.logo);
   return (
     <View style={styles.item}>
-      <Avatar.Image source={require('../../assets/stores/2.png')} size={50} />
+      <Avatar.Image source={{ uri: `${uriPath}stores/${s.logo}` }} size={50} />
       <Text>{s.name}</Text>
       <Text>{s.dist}m</Text>
     </View>

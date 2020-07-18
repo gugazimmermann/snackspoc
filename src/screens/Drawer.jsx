@@ -18,6 +18,7 @@ import {
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { UserContext } from '../context/UserContext';
+import { uriPath } from '../utils/keys';
 import getStyles from '../styles/drawer';
 
 const DrawerScreen = (props) => {
@@ -26,13 +27,15 @@ const DrawerScreen = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useContext(UserContext);
   const { user } = state;
-  const avatarPath = `../../assets/avatar/josesilva.png`;
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.drawerContent}>
         <View>
           <View style={styles.userInfoSection}>
-            <Avatar.Image source={require(avatarPath)} size={50} />
+            <Avatar.Image
+              source={{ uri: `${uriPath}avatar/${state.user.avatar}` }}
+              size={50}
+            />
             <Title style={styles.title}>{user.name}</Title>
             <Caption style={styles.caption}>{user.email}</Caption>
             <View style={styles.row}>
