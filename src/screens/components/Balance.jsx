@@ -1,35 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Surface, Divider, Text, Title, Avatar } from 'react-native-paper';
 import { uriPath } from '../../utils/keys';
-
-const styles = StyleSheet.create({
-  item: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 8,
-  },
-  title: {
-    width: 64,
-    fontSize: 32,
-    fontFamily: 'Ubuntu_700Bold',
-  },
-  content: {
-    flex: 1,
-    alignSelf: 'flex-start',
-  },
-  text: {
-    justifyContent: 'flex-start',
-  },
-  logo: {
-    width: 56,
-    alignItems: 'flex-end',
-  },
-});
+import getStyles from '../../styles/defaultList';
 
 export default function Balance({ item }) {
+  const styles = getStyles();
   const balance = item.item;
   return (
     <>

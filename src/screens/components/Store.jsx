@@ -1,26 +1,23 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Colors, Text, Avatar } from 'react-native-paper';
+import { Surface, Divider, Text, Title, Avatar } from 'react-native-paper';
 import { uriPath } from '../../utils/keys';
-
-const styles = StyleSheet.create({
-  item: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: Colors.orange200,
-    padding: 20,
-    margin: 10,
-  },
-});
+import getStyles from '../../styles/defaultList';
 
 export default function Store({ store }) {
+  const styles = getStyles();
   const s = store.item;
+  const dist = s.dist > 1000 ? `${(s.dist / 1000).toFixed(2)}km` : `${s.dist}m`;
   return (
-    <View style={styles.item}>
-      <Avatar.Image source={{ uri: `${uriPath}stores/${s.logo}` }} size={50} />
-      <Text>{s.name}</Text>
-      <Text>{s.dist}m</Text>
-    </View>
+    <>
+      <Surface style={styles.item}>
+        <Avatar.Image
+          size={50}
+          source={{ uri: `${uriPath}stores/${s.logo}` }}
+        />
+        <Text style={[styles.text, { fontWeight: 'bold' }]}>{s.name}</Text>
+        <Title style={styles.dist}>{dist}</Title>
+      </Surface>
+      <Divider />
+    </>
   );
 }
