@@ -1,8 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable global-require */
-/* eslint-disable import/no-dynamic-require */
+/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import {
@@ -21,10 +19,9 @@ import { UserContext } from '../context/UserContext';
 import { uriPath } from '../utils/keys';
 import getStyles from '../styles/drawer';
 
-const DrawerScreen = (props) => {
+export default function DrawerScreen(props) {
   const theme = useTheme();
   const styles = getStyles(theme);
-  // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useContext(UserContext);
   const { user } = state;
   return (
@@ -114,11 +111,4 @@ const DrawerScreen = (props) => {
       </View>
     </DrawerContentScrollView>
   );
-};
-
-DrawerScreen.propTypes = {
-  toggleTheme: PropTypes.func.isRequired,
-  signOut: PropTypes.func.isRequired,
-};
-
-export default DrawerScreen;
+}

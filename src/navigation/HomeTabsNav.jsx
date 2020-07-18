@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme, Colors } from 'react-native-paper';
@@ -12,11 +11,11 @@ const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 export default function HomeTabsNav({ navigation }) {
   const theme = useTheme();
+  let banner = Math.floor(Math.random() * Math.floor(8));
 
-  let bannerNum = Math.floor(Math.random() * Math.floor(8));
   useEffect(() => {
     const unsubscribe = navigation.addListener('tabPress', () => {
-      bannerNum = Math.floor(Math.random() * Math.floor(8));
+      banner = Math.floor(Math.random() * Math.floor(8));
     });
 
     return unsubscribe;
@@ -50,7 +49,7 @@ export default function HomeTabsNav({ navigation }) {
           ),
         }}
       >
-        {(props) => <Balance {...props} bannerNum={bannerNum} />}
+        {(props) => <Balance {...props} banner={banner} />}
       </Screen>
       <Screen
         name='Promotions'

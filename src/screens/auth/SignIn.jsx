@@ -1,5 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useTheme, Card, TextInput, Button, Text } from 'react-native-paper';
 import {

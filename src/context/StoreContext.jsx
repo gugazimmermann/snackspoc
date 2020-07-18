@@ -1,5 +1,4 @@
 import React, { createContext, useReducer } from 'react';
-import PropTypes from 'prop-types';
 
 const intialState = {
   stores: [],
@@ -28,10 +27,6 @@ const StoresProvider = ({ children }) => {
       {children}
     </StoresContext.Provider>
   );
-};
-
-StoresProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default StoresProvider;

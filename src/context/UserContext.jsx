@@ -1,5 +1,4 @@
 import React, { createContext, useReducer } from 'react';
-import PropTypes from 'prop-types';
 
 const intialState = {
   user: {
@@ -46,10 +45,6 @@ const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
-
-UserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default UserProvider;

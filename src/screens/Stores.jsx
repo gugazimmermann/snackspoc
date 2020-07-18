@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,7 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import { StoresContext } from '../context/StoreContext';
-import Store from '../components/Store';
+import Store from './components/Store';
 
 const styles = StyleSheet.create({
   container: {

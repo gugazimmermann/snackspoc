@@ -1,7 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable global-require */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable no-nested-ternary */
 import React, { useContext } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme, Appbar, Avatar } from 'react-native-paper';
@@ -9,8 +5,8 @@ import { UserContext } from '../context/UserContext';
 import { uriPath } from '../utils/keys';
 import getStyles from '../styles/header';
 
-export default function Header({ scene, previous, navigation }) {
-  const [state, dispatch] = useContext(UserContext);
+export default function Header({ scene, navigation, previous = false }) {
+  const [state] = useContext(UserContext);
   const theme = useTheme();
   const styles = getStyles(theme);
 

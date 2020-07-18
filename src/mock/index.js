@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export const user = {
   udadete: false,
   id: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
@@ -887,5 +885,26 @@ export const stores = [
     state: 'd076c993-910f-40bb-be28-e86736d57176',
     coords: [-26.9131894, -48.6794813],
     categories: ['0884961e-3a71-4836-8293-231f8fc88be2'],
+  },
+];
+
+export const balance = [
+  {
+    id: '2d40c352-1d5c-478d-af3a-2e78736a95ac',
+    user: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
+    store: '3fa2067d-41e5-4b15-bec5-8e8d8acebc18',
+    type: 'in',
+    value: 50,
+    date: '2020-07-17T16:27:33',
+    expirationDate: '2021-01-17T16:27:33',
+  },
+  {
+    id: '3fe93d19-1a99-4c45-8630-40faa8a042d5',
+    user: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
+    store: '54d7c413-4ec1-4ff6-82dd-9a4457418c41',
+    type: 'in',
+    value: 50,
+    date: '2020-06-10T13:55:25',
+    expirationDate: '2020-12-10T13:55:25',
   },
 ];

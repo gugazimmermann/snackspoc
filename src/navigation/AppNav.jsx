@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
 import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Geocoder from 'react-native-geocoding';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useTheme } from 'react-native-paper';
@@ -23,7 +23,6 @@ const Drawer = createDrawerNavigator();
 export default function AppNavigation({ toggleTheme, signOut }) {
   const theme = useTheme();
   const [userState, userDispatch] = useContext(UserContext);
-  // eslint-disable-next-line no-unused-vars
   const [storeState, storeDispatch] = useContext(StoresContext);
 
   const [init, setInit] = useState(false);
@@ -110,7 +109,6 @@ export default function AppNavigation({ toggleTheme, signOut }) {
                 short_name: 'SC',
               },
             };
-            // eslint-disable-next-line no-param-reassign
             coords = {
               latitude: -26.9040417,
               longitude: -48.6715267,
@@ -147,7 +145,7 @@ export default function AppNavigation({ toggleTheme, signOut }) {
         };
         getNearStores(coords);
       },
-      (err) => console.log(err.message),
+      (err) => console.error(err.message),
       {
         enableHighAccuracy: true,
         timeout: 20000,
@@ -178,8 +176,3 @@ export default function AppNavigation({ toggleTheme, signOut }) {
     </>
   );
 }
-
-AppNavigation.propTypes = {
-  toggleTheme: PropTypes.func.isRequired,
-  signOut: PropTypes.func.isRequired,
-};

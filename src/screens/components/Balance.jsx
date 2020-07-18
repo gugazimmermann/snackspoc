@@ -1,9 +1,7 @@
-/* eslint-disable global-require */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, Text, Avatar } from 'react-native-paper';
-import { uriPath } from '../utils/keys';
+import { uriPath } from '../../utils/keys';
 
 const styles = StyleSheet.create({
   item: {
@@ -16,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Store({ store }) {
+export default function Balance({ store }) {
   const s = store.item;
   return (
     <View style={styles.item}>

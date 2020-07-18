@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import logo from '../../assets/icon.png';
 
-function Initializing() {
+export default function Initializing() {
   const animatedValue = useRef(new Animated.Value(0.1)).current;
 
   useEffect(() => {
@@ -35,5 +35,3 @@ function Initializing() {
     </View>
   );
 }
-
-export default Initializing;

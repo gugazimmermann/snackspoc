@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme, Colors } from 'react-native-paper';
@@ -9,14 +7,14 @@ import Banner from '../components/Banner';
 import Statement from './Statement';
 import Stores from './Stores';
 
-const { Navigator, Screen } = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
-export default function Balance({ bannerNum }) {
+export default function Balance({ banner }) {
   const theme = useTheme();
   return (
     <>
-      <Banner bannerNum={bannerNum} />
-      <Navigator
+      <Banner banner={banner} />
+      <Tab.Navigator
         initialRouteName='Balance'
         lazy
         tabBarOptions={{
@@ -34,14 +32,14 @@ export default function Balance({ bannerNum }) {
           },
         }}
       >
-        <Screen
+        <Tab.Screen
           name='Statement'
           component={Statement}
           options={{
             tabBarLabel: 'Statement',
           }}
         />
-        <Screen
+        <Tab.Screen
           name='Used'
           component={Stores}
           options={{
@@ -51,7 +49,7 @@ export default function Balance({ bannerNum }) {
             ),
           }}
         />
-      </Navigator>
+      </Tab.Navigator>
     </>
   );
 }
