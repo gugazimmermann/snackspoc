@@ -99,7 +99,7 @@ export function getStoreByCityId(id) {
 
 export function getBalanceByUserId(id) {
   return new Promise((res) => {
-    const balance = data.balance.find((b) => b.user === id);
+    const balance = data.balance.filter((b) => b.user === id);
     setTimeout(() => res(balance), 100);
   });
 }

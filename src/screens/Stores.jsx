@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -24,9 +24,9 @@ const wait = (timeout) => {
 
 export default function Stores() {
   const [storeState, storeDispatch] = useContext(StoresContext);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
 
     wait(2000).then(() => setRefreshing(false));

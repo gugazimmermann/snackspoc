@@ -903,7 +903,7 @@ export const balance = [
     user: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
     store: '54d7c413-4ec1-4ff6-82dd-9a4457418c41',
     type: 'in',
-    value: 50,
+    value: 25,
     date: '2020-06-10T13:55:25',
     expirationDate: '2020-12-10T13:55:25',
   },
