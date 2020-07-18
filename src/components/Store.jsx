@@ -1,25 +1,27 @@
-/* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, Text } from 'react-native-paper';
-
-export default function Store({ city }) {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{city.item.name}</Text>
-    </View>
-  );
-}
+import { Colors, Text, Avatar } from 'react-native-paper';
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: Colors.orange100,
-    padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 24,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: Colors.orange200,
+    padding: 20,
+    margin: 10,
   },
 });
+
+export default function Store({ store }) {
+  const s = store.item;
+  console.log(s.logo);
+  return (
+    <View style={styles.item}>
+      <Avatar.Image source={require('../../assets/stores/2.png')} size={50} />
+      <Text>{s.name}</Text>
+      <Text>{s.dist}m</Text>
+    </View>
+  );
+}

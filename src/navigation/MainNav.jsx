@@ -14,22 +14,21 @@ import {
   Ubuntu_700Bold,
 } from '@expo-google-fonts/ubuntu';
 import AsyncStorage from '@react-native-community/async-storage';
-import { AuthContext } from '../context/AuthContext';
+import { UserContext } from '../context/UserContext';
 
 import theme from '../styles/theme';
-import { currentUserInfo } from '../api/auth';
+import * as api from '../api';
 
 import Initializing from '../components/Initializing';
 import AuthNav from './AuthNav';
 import AppNav from './AppNav';
 
 export default function MainNavigation() {
-  const [state, dispatch] = useContext(AuthContext);
   const colorScheme = useColorScheme(false);
   const [themeType, setThemeType] = useState(
     colorScheme === 'dark' ? 'dark' : 'light'
   );
-  const [user, setUser] = useState(state.user);
+  const [state, dispatch] = useContext(UserContext);
 
   const setStorageThemeType = async (t) => {
     try {
@@ -65,15 +64,13 @@ export default function MainNavigation() {
     Ubuntu_700Bold,
   });
 
-  function signIn() {
-    const currentUser = currentUserInfo();
-    dispatch({ type: 'LOGIN', payload: currentUser });
-    setUser(true);
+  async function signIn() {
+    const currentUser = await api.getUser();
+    dispatch({ type: 'SET_USER', payload: currentUser });
   }
 
   function signOut() {
-    setUser();
-    dispatch({ type: 'LOGIN', payload: {} });
+    dispatch({ type: 'LOGOUT', payload: {} });
   }
 
   useEffect(() => {
@@ -92,7 +89,7 @@ export default function MainNavigation() {
         translucent={false}
       />
       <NavigationContainer theme={theme(themeType)}>
-        {user ? (
+        {state.user.id ? (
           <AppNav toggleTheme={toggleThemeType} signOut={signOut} />
         ) : (
           <AuthNav signIn={signIn} />

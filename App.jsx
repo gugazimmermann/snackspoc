@@ -3,15 +3,18 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppearanceProvider } from 'react-native-appearance';
 import MainNav from './src/navigation/MainNav';
-import AuthProvider from './src/context/AuthContext';
+import UserProvider from './src/context/UserContext';
+import StoresProvider from './src/context/StoreContext';
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <AppearanceProvider>
-        <AuthProvider>
-          <MainNav />
-        </AuthProvider>
+        <UserProvider>
+          <StoresProvider>
+            <MainNav />
+          </StoresProvider>
+        </UserProvider>
       </AppearanceProvider>
     </SafeAreaProvider>
   );
