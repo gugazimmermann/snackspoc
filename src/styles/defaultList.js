@@ -13,6 +13,8 @@ const getStyles = () =>
       width: 64,
       fontSize: 32,
       fontFamily: 'Ubuntu_700Bold',
+      textAlign: 'center',
+      marginRight: 8,
     },
     content: {
       flex: 1,

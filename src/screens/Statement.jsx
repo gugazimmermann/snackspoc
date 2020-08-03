@@ -40,7 +40,7 @@ export default function Statement() {
         value: b.value,
       });
     }
-    return orderBy(formatedBalance, ['date'], ['asc']);
+    return orderBy(formatedBalance, ['date'], ['desc']);
   }
 
   async function getBalance() {
