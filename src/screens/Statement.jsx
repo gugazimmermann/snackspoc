@@ -1,76 +1,87 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  RefreshControl,
-  FlatList,
-} from 'react-native';
+import { SafeAreaView, RefreshControl, FlatList } from 'react-native';
+import { Divider, ActivityIndicator } from 'react-native-paper';
 import moment from 'moment';
 import orderBy from 'lodash/orderBy';
 import { UserContext } from '../context/UserContext';
 import * as api from '../api';
-import Balance from './components/Balance';
+import NothingToSee from './components/NothingToSee';
+import StatementTotal from './components/StatementTotal';
+import StatementItem from './components/StatementItem';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-});
-
-export default function Statement() {
+export default function Statement({ type }) {
   const [state] = useContext(UserContext);
-  const [balance, setBalance] = useState([]);
+  const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  async function formatBalance(bal) {
-    const formatedBalance = [];
-    for (const b of bal) {
-      const store = await api.getStoreById(b.store);
-      const date = moment(b.date).format('DD/MM/YY HH:mm');
-      const expirationDate = moment(b.expirationDate).format('DD/MM/YY');
-      formatedBalance.push({
-        id: b.id,
+  async function formatItems(receivedItems) {
+    const formatedItems = [];
+    for (const item of receivedItems) {
+      const store = await api.getStoreById(item.store);
+      const date = moment(item.date).format('DD/MM/YY HH:mm');
+      const expirationDate = moment(item.expirationDate).format('DD/MM/YY');
+      formatedItems.push({
+        id: item.id,
         store,
+        originalDate: item.date,
         date,
         expirationDate,
-        type: b.type,
-        value: b.value,
+        type: item.type,
+        value: item.value,
       });
     }
-    return orderBy(formatedBalance, ['date'], ['desc']);
+    setTotal(formatedItems.reduce((t, i) => t + i.value, 0));
+    return orderBy(formatedItems, ['originalDate'], ['desc']);
   }
 
-  async function getBalance() {
-    setRefreshing(true);
-    const b = await api.getBalanceByUserId(state.user.id);
-    const formatB = await formatBalance(b);
-    setBalance(formatB);
+  async function getItems() {
+    const receivedItems = await api.getBalanceByUserId(state.user.id, type);
+    const formatedItems = await formatItems(receivedItems);
+    setItems(formatedItems);
+    setLoading(false);
     setRefreshing(false);
   }
 
   const onRefresh = useCallback(() => {
-    getBalance();
+    setRefreshing(true);
+    getItems();
   }, []);
 
   useEffect(() => {
-    getBalance();
+    setLoading(true);
+    getItems();
   }, []);
 
-  const renderBalance = (item) => <Balance item={item} />;
+  const renderItems = (item) => <StatementItem value={item} />;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={balance}
-        renderItem={renderBalance}
-        keyExtractor={(b) => b.id}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      />
+    <SafeAreaView
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+      }}
+    >
+      {!items.length && loading && (
+        <ActivityIndicator style={{ paddingTop: 16 }} />
+      )}
+      {items.length ? (
+        <FlatList
+          data={items}
+          renderItem={renderItems}
+          keyExtractor={(i) => i.id}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          ItemSeparatorComponent={Divider}
+        />
+      ) : (
+        <NothingToSee />
+      )}
+      <StatementTotal total={total} type={type} />
     </SafeAreaView>
   );
 }

@@ -15,6 +15,7 @@ import {
   Button,
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import i18n from '../../i18n';
 import { UserContext } from '../context/UserContext';
 import { uriPath } from '../utils/keys';
 import getStyles from '../styles/drawer';
@@ -42,7 +43,7 @@ export default function DrawerScreen(props) {
             </View>
             <View style={styles.row}>
               <Paragraph style={[styles.paragraph, styles.caption]}>
-                Searching Area: {user.area / 1000}km
+                {i18n.t('drawer.searchingArea')}: {user.area / 1000}km
               </Paragraph>
             </View>
             <View style={styles.row}>
@@ -50,13 +51,17 @@ export default function DrawerScreen(props) {
                 <Paragraph style={[styles.paragraph, styles.caption]}>
                   202
                 </Paragraph>
-                <Caption style={styles.caption}>Following</Caption>
+                <Caption style={styles.caption}>
+                  {i18n.t('drawer.following')}
+                </Caption>
               </View>
               <View style={styles.section}>
                 <Paragraph style={[styles.paragraph, styles.caption]}>
                   159
                 </Paragraph>
-                <Caption style={styles.caption}>Followers</Caption>
+                <Caption style={styles.caption}>
+                  {i18n.t('drawer.followers')}
+                </Caption>
               </View>
             </View>
           </View>
@@ -69,14 +74,14 @@ export default function DrawerScreen(props) {
                   size={size}
                 />
               )}
-              label='Profile'
+              label={i18n.t('drawer.profile')}
               onPress={() => props.navigation.navigate('Profile')}
             />
             <DrawerItem
               icon={({ color, size }) => (
                 <MaterialCommunityIcons name='tune' color={color} size={size} />
               )}
-              label='Preferences'
+              label={i18n.t('drawer.preferences')}
               onPress={() => props.navigation.navigate('Preferences')}
             />
             <DrawerItem
@@ -87,14 +92,14 @@ export default function DrawerScreen(props) {
                   size={size}
                 />
               )}
-              label='Bookmarks'
+              label={i18n.t('drawer.marked')}
               onPress={() => {}}
             />
           </Drawer.Section>
         </View>
-        <Drawer.Section title='Theme'>
+        <Drawer.Section title={i18n.t('drawer.theme')}>
           <View style={styles.preference}>
-            <Text>Dark</Text>
+            <Text>{i18n.t('drawer.dark')}</Text>
             <Switch value={theme.dark} onValueChange={props.toggleTheme} />
           </View>
         </Drawer.Section>
@@ -106,7 +111,7 @@ export default function DrawerScreen(props) {
           mode='contained'
           onPress={() => props.signOut()}
         >
-          Sign Out
+          {i18n.t('drawer.signOut')}
         </Button>
       </View>
     </DrawerContentScrollView>

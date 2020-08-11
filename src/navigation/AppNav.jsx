@@ -8,11 +8,10 @@ import orderBy from 'lodash/orderBy';
 import { geoCoderKey } from '../utils/keys';
 import { UserContext } from '../context/UserContext';
 import { StoresContext } from '../context/StoreContext';
-
+import i18n from '../../i18n';
 import * as api from '../api';
 import calculateDistance from '../utils/distance';
 import notification from '../utils/notifications';
-
 import ErrorDialog from '../components/ErrorDialog';
 import Initializing from '../components/Initializing';
 import HomeNav from './HomeNav';
@@ -66,6 +65,25 @@ export default function AppNavigation({ toggleTheme, signOut }) {
     if (!init) setInit(true);
   }
 
+  function watchPosition() {
+    navigator.geolocation.watchPosition(
+      (possiton) => {
+        const coords = {
+          latitude: possiton.coords.latitude,
+          longitude: possiton.coords.longitude,
+        };
+        getNearStores(coords);
+      },
+      (err) => console.error(err.message),
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 0,
+        distanceFilter: 5,
+      }
+    );
+  }
+
   function getGeocoder(coords) {
     Geocoder.init(geoCoderKey);
     Geocoder.from(coords.latitude, coords.longitude)
@@ -95,7 +113,9 @@ export default function AppNavigation({ toggleTheme, signOut }) {
           if (r === undefined) {
             setError({
               show: true,
-              msg: `Sorry, ${changeUser.city.long_name} has no data in this demo, we are changing to Itajaí / SC / Brazil.`,
+              msg: `${i18n.t('geocoder.sorry')}, ${
+                changeUser.city.long_name
+              } ${i18n.t('geocoder.noData')}`,
             });
             changeUser = {
               ...userState.user,
@@ -113,6 +133,8 @@ export default function AppNavigation({ toggleTheme, signOut }) {
               latitude: -26.9040417,
               longitude: -48.6715267,
             };
+          } else {
+            watchPosition();
           }
           userDispatch({ type: 'SET_USER', payload: changeUser });
           getNearStores(coords);
@@ -137,22 +159,6 @@ export default function AppNavigation({ toggleTheme, signOut }) {
 
   useEffect(() => {
     getInitialCoords();
-    navigator.geolocation.watchPosition(
-      (possiton) => {
-        const coords = {
-          latitude: possiton.coords.latitude,
-          longitude: possiton.coords.longitude,
-        };
-        getNearStores(coords);
-      },
-      (err) => console.error(err.message),
-      {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 0,
-        distanceFilter: 5,
-      }
-    );
   }, []);
 
   if (!init) {

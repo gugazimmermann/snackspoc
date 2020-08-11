@@ -33,8 +33,10 @@ const fontConfig = {
 export default function mainTheme(themeStyle) {
   const custom = {
     colors: {
-      primary: Colors.teal500,
-      accent: Colors.orange500,
+      primary: Colors.teal400,
+      accent: Colors.orange900,
+      positive: Colors.tealA700,
+      negative: Colors.redA700,
     },
     fonts: configureFonts(fontConfig),
   };

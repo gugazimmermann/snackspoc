@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme, Text, Card, TextInput, Button } from 'react-native-paper';
 import { KeyboardAvoidingView, Image, View } from 'react-native';
+import i18n from '../../../i18n';
 import getStyles from '../../styles/signUp';
 import logo from '../../../assets/icon.png';
 
@@ -24,14 +25,14 @@ export default function SignUp({ navigation }) {
         <Card.Content>
           <TextInput
             theme={theme}
-            label='Name'
+            label={i18n.t('login.name')}
             value={userData.givenName}
             onChangeText={(e) => setUserData({ ...userData, givenName: e })}
             style={styles.textInput}
           />
           <TextInput
             theme={theme}
-            label='Email'
+            label={i18n.t('login.email')}
             textContentType='emailAddress'
             keyboardType='email-address'
             value={userData.email}
@@ -40,7 +41,7 @@ export default function SignUp({ navigation }) {
           />
           <TextInput
             theme={theme}
-            label='Password'
+            label={i18n.t('login.password')}
             secureTextEntry
             value={userData.password}
             onChangeText={(e) => setUserData({ ...userData, password: e })}
@@ -48,7 +49,7 @@ export default function SignUp({ navigation }) {
           />
           <TextInput
             theme={theme}
-            label='Repeat Password'
+            label={i18n.t('login.repeatPassword')}
             secureTextEntry
             value={userData.repeatPassword}
             onChangeText={(e) =>
@@ -63,7 +64,7 @@ export default function SignUp({ navigation }) {
             onPress={navigation.goBack}
             style={[styles.button, styles.signup]}
           >
-            Sign Up
+            {i18n.t('login.signUp')}
           </Button>
         </Card.Actions>
       </Card>
@@ -72,7 +73,7 @@ export default function SignUp({ navigation }) {
         onPress={navigation.goBack}
         style={[styles.button]}
       >
-        Back to Sign In
+        {i18n.t('login.backToSignIn')}
       </Button>
     </KeyboardAvoidingView>
   );

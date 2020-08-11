@@ -6,7 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-
+import i18n from '../../../i18n';
 import getStyles from '../../styles/signIn';
 import ErrorDialog from '../../components/ErrorDialog';
 import logo from '../../../assets/icon.png';
@@ -44,7 +44,7 @@ export default function SignIn({ navigation, signIn }) {
         <Card.Content>
           <TextInput
             theme={theme}
-            label='Email'
+            label={i18n.t('login.email')}
             textContentType='emailAddress'
             keyboardType='email-address'
             value={ud.e}
@@ -55,7 +55,7 @@ export default function SignIn({ navigation, signIn }) {
           />
           <TextInput
             theme={theme}
-            label='Password'
+            label={i18n.t('login.password')}
             secureTextEntry
             value={ud.p}
             onChangeText={(tp) => setUd({ ...ud, p: tp })}
@@ -72,12 +72,12 @@ export default function SignIn({ navigation, signIn }) {
             disabled={loading}
             style={styles.button}
           >
-            Sign In
+            {i18n.t('login.signIn')}
           </Button>
         </Card.Actions>
         <Card.Actions>
           <TouchableOpacity onPress={() => {}}>
-            <Text>Forgot Password?</Text>
+            <Text>{i18n.t('login.forgotPassword')}</Text>
           </TouchableOpacity>
         </Card.Actions>
       </Card>
@@ -92,7 +92,7 @@ export default function SignIn({ navigation, signIn }) {
           disabled={loading}
           style={[styles.button, styles.facebook]}
         >
-          Sign In With Facebook
+          {i18n.t('login.signInFacebook')}
         </Button>
         <Button
           icon='google'
@@ -104,7 +104,7 @@ export default function SignIn({ navigation, signIn }) {
           disabled={loading}
           style={[styles.button, styles.google]}
         >
-          Sign In With Google
+          {i18n.t('login.signInGoogle')}
         </Button>
       </View>
       <Button
@@ -114,7 +114,7 @@ export default function SignIn({ navigation, signIn }) {
         disabled={loading}
         style={[styles.button, styles.signup]}
       >
-        Sign Up
+        {i18n.t('login.signUp')}
       </Button>
       <ErrorDialog theme={theme} data={error} show={setError} />
     </KeyboardAvoidingView>

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from 'react-native-paper';
 
 const getStyles = () =>
   StyleSheet.create({
@@ -15,6 +16,7 @@ const getStyles = () =>
       fontFamily: 'Ubuntu_700Bold',
       textAlign: 'center',
       marginRight: 8,
+      color: Colors.tealA700,
     },
     content: {
       flex: 1,

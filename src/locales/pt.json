@@ -1,0 +1,50 @@
+{
+  "navigation": {
+    "signUp": "Cadastrar",
+    "statement": "Extrato",
+    "profile": "Perfil",
+    "preferences": "Preferências",
+    "promotions": "Promoções",
+    "stores": "Estabelecimentos",
+    "social": "Social",
+    "gain": "Ganho",
+    "used": "Gasto"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Senha",
+    "signIn": "Entrar",
+    "forgotPassword": "Esqueceu a Senha?",
+    "signInFacebook": "Entrar com Facebook",
+    "signInGoogle": "Entrar com Google",
+    "signUp": "Cadastrar",
+    "name": "Nome",
+    "repeatPassword": "Repita a Senha",
+    "backToSignIn": "Voltar"
+  },
+  "drawer": {
+    "searchingArea": "Área  de Busca",
+    "following": "Seguindo",
+    "followers": "Seguidores",
+    "profile": "Perfil",
+    "preferences": "Preferências",
+    "marked": "Marcados",
+    "theme": "Tema",
+    "dark": "Escuro",
+    "signOut": "Sair"
+  },
+  "errorDialog": {
+    "error": "Erro"
+  },
+  "geocoder": {
+    "sorry": "Desculpe",
+    "noData": "não tem conteúdo neste Demo, estamos mudando para Itajaí / SC / Brazil."
+  },
+  "statement": {
+    "total": "Total",
+    "nothingToSee": "Desculpe, você não tem conteúdo para ver.",
+    "gainedOn": "Ganho em",
+    "usedOn": "Usado em",
+    "expireOn": "Expira em"
+  }
+}

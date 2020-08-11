@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import i18n from '../../i18n';
 import Header from '../components/Header';
 import SignIn from '../screens/auth/SignIn';
 import SignUp from '../screens/auth/SignUp';
@@ -22,7 +23,10 @@ export default function AuthNav({ signIn }) {
       <Screen
         name='SignUp'
         component={SignUp}
-        options={{ title: 'Sign Up', headerStyle: { marginTop: 0 } }}
+        options={{
+          title: i18n.t('navigation.signUp'),
+          headerStyle: { marginTop: 0 },
+        }}
       />
     </Navigator>
   );

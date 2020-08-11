@@ -1,0 +1,50 @@
+{
+  "navigation": {
+    "signUp": "Sign Up",
+    "statement": "Statement",
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "promotions": "Promoções",
+    "stores": "Stores",
+    "social": "Social",
+    "gain": "Gain",
+    "used": "Used"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "forgotPassword": "Forgot Password?",
+    "signInFacebook": "Sign In With Facebook",
+    "signInGoogle": "Sign In With Google",
+    "signUp": "Sign Up",
+    "name": "Name",
+    "repeatPassword": "Repeat Password",
+    "backToSignIn": "Back To Sign In"
+  },
+  "drawer": {
+    "searchingArea": "Searching Area",
+    "following": "Following",
+    "followers": "Followers",
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "marked": "Marked",
+    "theme": "Theme",
+    "dark": "Dark",
+    "signOut": "Sign Out"
+  },
+  "errorDialog": {
+    "error": "Error"
+  },
+  "geocoder": {
+    "sorry": "Sorry",
+    "noData": "has no data in this demo, we are changing to Itajaí / SC / Brazil."
+  },
+  "statement": {
+    "total": "Total",
+    "nothingToSee": "Sorry, you have nothing to see",
+    "gainedOn": "Gained on",
+    "usedOn": "Used on",
+    "expireOn": "Expire on"
+  }
+}

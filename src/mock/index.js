@@ -928,7 +928,7 @@ export const balance = [
   {
     id: '5c80a758-b08c-4424-93cd-25720c79962e',
     user: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
-    store: '3fa2067d-41e5-4b15-bec5-8e8d8acebc18',
+    store: '7834e2d3-82e6-4234-a2f9-7ddb06a647e9',
     type: 'in',
     value: 18,
     date: '2020-05-22T16:27:33',
@@ -955,10 +955,18 @@ export const balance = [
   {
     id: '76408c16-1804-4101-b271-0efd2b306134',
     user: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
-    store: '54d7c413-4ec1-4ff6-82dd-9a4457418c41',
+    store: '748f07f6-10e4-4f2e-89c5-6c2b586b9dbd',
     type: 'in',
     value: 55,
     date: '2020-04-03T09:27:25',
     expirationDate: '2020-10-03',
+  },
+  {
+    id: '76408c16-1804-4101-b271-0efd2b306134',
+    user: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
+    store: '748f07f6-10e4-4f2e-89c5-6c2b586b9dbd',
+    type: 'out',
+    value: 75,
+    date: '2020-08-03T16:12:35',
   },
 ];

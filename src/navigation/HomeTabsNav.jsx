@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme, Colors } from 'react-native-paper';
 import { FontAwesome5 as FA5 } from '@expo/vector-icons';
+import i18n from '../../i18n';
 import Balance from '../screens/Balance';
 import Promotions from '../screens/Promotions';
 import Stores from '../screens/Stores';
@@ -23,7 +24,7 @@ export default function HomeTabsNav({ navigation }) {
 
   return (
     <Navigator
-      initialRouteName='Balance'
+      initialRouteName={i18n.t('navigation.statement')}
       tabBarPosition='bottom'
       lazy
       tabBarOptions={{
@@ -41,9 +42,9 @@ export default function HomeTabsNav({ navigation }) {
       }}
     >
       <Screen
-        name='Balance'
+        name={i18n.t('navigation.statement')}
         options={{
-          tabBarLabel: 'Balance',
+          tabBarLabel: i18n.t('navigation.statement'),
           tabBarIcon: ({ color }) => (
             <FA5 name='list-ol' size={22} color={color} />
           ),
@@ -52,30 +53,30 @@ export default function HomeTabsNav({ navigation }) {
         {(props) => <Balance {...props} banner={banner} />}
       </Screen>
       <Screen
-        name='Promotions'
+        name={i18n.t('navigation.promotions')}
         component={Promotions}
         options={{
-          tabBarLabel: 'Promotions',
+          tabBarLabel: i18n.t('navigation.promotions'),
           tabBarIcon: ({ color }) => (
             <FA5 name='shopping-bag' size={22} color={color} />
           ),
         }}
       />
       <Screen
-        name='Stores'
+        name={i18n.t('navigation.stores')}
         component={Stores}
         options={{
-          tabBarLabel: 'Stores',
+          tabBarLabel: i18n.t('navigation.stores'),
           tabBarIcon: ({ color }) => (
             <FA5 name='store-alt' size={22} color={color} />
           ),
         }}
       />
       <Screen
-        name='Social'
+        name={i18n.t('navigation.social')}
         component={Social}
         options={{
-          tabBarLabel: 'Social',
+          tabBarLabel: i18n.t('navigation.social'),
           tabBarIcon: ({ color }) => (
             <FA5 name='hands-helping' size={22} color={color} />
           ),

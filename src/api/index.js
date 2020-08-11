@@ -97,9 +97,11 @@ export function getStoreByCityId(id) {
   });
 }
 
-export function getBalanceByUserId(id) {
+export function getBalanceByUserId(id, type) {
   return new Promise((res) => {
-    const balance = data.balance.filter((b) => b.user === id);
+    const balance = data.balance.filter(
+      (b) => b.user === id && b.type === type
+    );
     setTimeout(() => res(balance), 100);
   });
 }

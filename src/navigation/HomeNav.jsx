@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import i18n from '../../i18n';
 import Header from '../components/Header';
 import HomeTabsNav from './HomeTabsNav';
 import Profile from '../screens/user/Profile';
@@ -21,7 +22,7 @@ export default function HomeNavigation() {
       }}
     >
       <Stack.Screen
-        name='Balance'
+        name={i18n.t('navigation.statement')}
         component={HomeTabsNav}
         options={({ route }) => {
           const routeName = route.state
@@ -31,14 +32,14 @@ export default function HomeNavigation() {
         }}
       />
       <Stack.Screen
-        name='Profile'
+        name={i18n.t('navigation.profile')}
         component={Profile}
-        options={{ headerTitle: 'Profile' }}
+        options={{ headerTitle: i18n.t('navigation.profile') }}
       />
       <Stack.Screen
-        name='Preferences'
+        name={i18n.t('navigation.preferences')}
         component={Preferences}
-        options={{ headerTitle: 'Preferences' }}
+        options={{ headerTitle: i18n.t('navigation.preferences') }}
       />
     </Stack.Navigator>
   );
