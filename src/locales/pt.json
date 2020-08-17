@@ -37,8 +37,7 @@
     "error": "Erro"
   },
   "geocoder": {
-    "sorry": "Desculpe",
-    "noData": "não tem conteúdo neste Demo, estamos mudando para Itajaí / SC / Brazil."
+    "noData": "Desculpe, este é somente um PoC.  Sua cidade não tem conteúdo, ou você não deu permissão para acessar a localização. Estamos mudando para Itajaí / SC / Brazil."
   },
   "statement": {
     "total": "Total",

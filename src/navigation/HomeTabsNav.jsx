@@ -12,13 +12,12 @@ const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 export default function HomeTabsNav({ navigation }) {
   const theme = useTheme();
-  let banner = Math.floor(Math.random() * Math.floor(8));
+  let banner = Math.floor(Math.random() * Math.floor(8)) + 1;
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('tabPress', () => {
-      banner = Math.floor(Math.random() * Math.floor(8));
+      banner = Math.floor(Math.random() * Math.floor(8)) + 1;
     });
-
     return unsubscribe;
   }, [navigation]);
 

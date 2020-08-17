@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import React, { useContext, useState, useEffect } from 'react';
+import * as Location from 'expo-location';
 import Geocoder from 'react-native-geocoding';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useTheme } from 'react-native-paper';
@@ -17,6 +18,8 @@ import Initializing from '../components/Initializing';
 import HomeNav from './HomeNav';
 import DrawerScreen from '../screens/Drawer';
 
+const DINTANCE_TO_NOTIFY = 50;
+
 const Drawer = createDrawerNavigator();
 
 export default function AppNavigation({ toggleTheme, signOut }) {
@@ -27,10 +30,17 @@ export default function AppNavigation({ toggleTheme, signOut }) {
   const [init, setInit] = useState(false);
   const [error, setError] = useState({ show: false, msg: '' });
 
+  function storeNotifications(stores) {
+    stores.forEach((store) => {
+      if (store.dist < DINTANCE_TO_NOTIFY) {
+        notification(store.name);
+      }
+    });
+  }
+
   async function getNearStores(coords) {
     const cities = await api.getAllCities();
     const stores = await api.getAllStores();
-
     const distanceCities = cities.map((city) => {
       const dist = calculateDistance(coords, {
         latitude: city.coords[0],
@@ -56,109 +66,106 @@ export default function AppNavigation({ toggleTheme, signOut }) {
       return { ...store, dist };
     });
     const orderStores = orderBy(distanceStores, ['dist'], ['asc']);
+    storeNotifications(orderStores);
     storeDispatch({ type: 'SET_STORES', payload: orderStores });
-    orderStores.forEach((store) => {
-      if (store.dist < 50) {
-        notification(store.name);
-      }
-    });
     if (!init) setInit(true);
   }
 
-  function watchPosition() {
-    navigator.geolocation.watchPosition(
-      (possiton) => {
-        const coords = {
-          latitude: possiton.coords.latitude,
-          longitude: possiton.coords.longitude,
-        };
-        getNearStores(coords);
-      },
-      (err) => console.error(err.message),
-      {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 0,
-        distanceFilter: 5,
-      }
-    );
+  async function watchPosition() {
+    const { status } = await Location.getPermissionsAsync();
+    if (status === 'granted') {
+      Location.watchPositionAsync(
+        {
+          accuracy: Location.Accuracy.BestForNavigation,
+          enableHighAccuracy: true,
+          distanceInterval: 1,
+        },
+        (position) => getNearStores(position.coords)
+      );
+    }
   }
 
-  function getGeocoder(coords) {
-    Geocoder.init(geoCoderKey);
-    Geocoder.from(coords.latitude, coords.longitude)
-      .then((res) => {
-        const addressComponents = res.results[0].address_components;
-        const cityObj = addressComponents.map((a) =>
-          a.types.find((t) => t === 'administrative_area_level_2') ? a : null
-        );
-        const stateObj = addressComponents.map((a) =>
-          a.types.find((t) => t === 'administrative_area_level_1') ? a : null
-        );
-        const cityFiltered = cityObj.filter(Boolean);
-        const stateFiltered = stateObj.filter(Boolean);
-        let changeUser = {
-          ...userState.user,
-          update: true,
-          city: {
-            long_name: cityFiltered[0].long_name,
-            short_name: cityFiltered[0].short_name,
-          },
-          state: {
-            long_name: stateFiltered[0].long_name,
-            short_name: stateFiltered[0].short_name,
-          },
-        };
-        api.getCityByName(changeUser.city.long_name).then((r) => {
-          if (r === undefined) {
-            setError({
-              show: true,
-              msg: `${i18n.t('geocoder.sorry')}, ${
-                changeUser.city.long_name
-              } ${i18n.t('geocoder.noData')}`,
-            });
-            changeUser = {
-              ...userState.user,
-              update: false,
-              city: {
-                long_name: 'Itajaí',
-                short_name: 'Itajaí',
-              },
-              state: {
-                long_name: 'Santa Catarina',
-                short_name: 'SC',
-              },
-            };
-            coords = {
-              latitude: -26.9040417,
-              longitude: -48.6715267,
-            };
-          } else {
-            watchPosition();
-          }
-          userDispatch({ type: 'SET_USER', payload: changeUser });
-          getNearStores(coords);
-        });
-      })
-      .catch((err) => console.warn(err));
-  }
-
-  function getInitialCoords() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const coords = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
+  async function verifyCity(userChanged) {
+    const city = await api.getCityByName(userChanged.city.long_name);
+    if (city === undefined) {
+      setError({
+        show: true,
+        msg: i18n.t('geocoder.noData'),
+      });
+      userChanged = {
+        ...userState.user,
+        update: false,
+        city: {
+          long_name: 'Itajaí',
+          short_name: 'Itajaí',
+        },
+        state: {
+          long_name: 'Santa Catarina',
+          short_name: 'SC',
+        },
+        coords: {
+          latitude: -26.9040417,
+          longitude: -48.6715267,
+        },
       };
-      if (!userState.user.city.long_name) {
-        getGeocoder(coords);
-      } else {
-        getNearStores(coords);
-      }
+    } else {
+      watchPosition();
+    }
+    getNearStores(userChanged.coords);
+    userDispatch({ type: 'SET_USER', payload: userChanged });
+  }
+
+  async function getGeocoder(coords) {
+    Geocoder.init(geoCoderKey, { language: 'pt-BR' });
+    const geocoder = await Geocoder.from(coords);
+
+    const addressComponents = geocoder.results[0].address_components;
+    const formattedAddress = geocoder.results[0].formatted_address;
+    const cityObj = addressComponents.map((a) =>
+      a.types.find((t) => t === 'administrative_area_level_2') ? a : null
+    );
+    const stateObj = addressComponents.map((a) =>
+      a.types.find((t) => t === 'administrative_area_level_1') ? a : null
+    );
+    const cityFiltered = cityObj.filter(Boolean);
+    const stateFiltered = stateObj.filter(Boolean);
+    const changedUser = {
+      ...userState.user,
+      update: true,
+      city: {
+        long_name: cityFiltered[0].long_name,
+        short_name: cityFiltered[0].short_name,
+      },
+      state: {
+        long_name: stateFiltered[0].long_name,
+        short_name: stateFiltered[0].short_name,
+      },
+      formattedAddress,
+      coords,
+    };
+
+    verifyCity(changedUser);
+  }
+
+  async function currentPosition() {
+    const position = await Location.getCurrentPositionAsync({
+      accuracy: Location.Accuracy.BestForNavigation,
+      enableHighAccuracy: true,
     });
+    getGeocoder(position.coords);
+  }
+
+  async function askPermissions() {
+    const { status } = await Location.requestPermissionsAsync();
+    if (status === 'granted') {
+      currentPosition();
+    } else {
+      verifyCity(userState.user);
+    }
   }
 
   useEffect(() => {
-    getInitialCoords();
+    askPermissions();
   }, []);
 
   if (!init) {

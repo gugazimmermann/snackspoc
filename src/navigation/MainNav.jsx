@@ -75,6 +75,7 @@ export default function MainNavigation() {
 
   const getStorageUser = async () => {
     try {
+      await AsyncStorage.removeItem('@user');
       const user = await AsyncStorage.getItem('@user');
       if (user !== null) {
         return JSON.parse(user);

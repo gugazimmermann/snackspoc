@@ -3,7 +3,7 @@ import * as data from '../mock';
 
 export function getUser() {
   return new Promise((res) => {
-    setTimeout(() => res({ ...data.user }), 1000);
+    setTimeout(() => res({ ...data.user }), 100);
   });
 }
 
@@ -42,10 +42,14 @@ export function getCityById(id) {
 
 export function getCityByName(name) {
   return new Promise((res) => {
-    const city = data.cities.find(
-      (s) =>
-        slugify(s.name, ' ').toLowerCase() === slugify(name, ' ').toLowerCase()
-    );
+    let city;
+    if (name) {
+      city = data.cities.find(
+        (s) =>
+          slugify(s.name, ' ').toLowerCase() ===
+          slugify(name, ' ').toLowerCase()
+      );
+    }
     setTimeout(() => res(city), 100);
   });
 }
