@@ -21,8 +21,8 @@ export default function Balance({ banner }) {
           height: Dimensions.get('window').height,
         }}
         tabBarOptions={{
-          activeTintColor: Colors.white,
-          inactiveTintColor: Colors.teal100,
+          activeTintColor: theme.colors.tabs.activeTintColor,
+          inactiveTintColor: theme.colors.tabs.inactiveTintColor,
           style: {
             backgroundColor: theme.colors.primary,
             shadowColor: Colors.black,

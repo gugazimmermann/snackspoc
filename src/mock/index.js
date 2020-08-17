@@ -3,7 +3,8 @@ export const user = {
   id: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
   name: 'José da Silva',
   email: 'josesilva@gmail.com',
-  avatar: 'josesilva.png',
+  avatar:
+    'https://raw.githubusercontent.com/gugazimmermann/snackspoc/master/assets/avatar/josesilva.png',
   area: 2500,
   city: {
     long_name: null,

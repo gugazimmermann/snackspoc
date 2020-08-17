@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme, Appbar, Avatar } from 'react-native-paper';
 import { UserContext } from '../context/UserContext';
-import { uriPath } from '../utils/keys';
 import getStyles from '../styles/header';
 
 export default function Header({ scene, navigation, previous = false }) {
@@ -31,7 +30,7 @@ export default function Header({ scene, navigation, previous = false }) {
         >
           <Avatar.Image
             size={40}
-            source={{ uri: `${uriPath}avatar/${state.user.avatar}` }}
+            source={{ uri: state.user.avatar }}
             style={styles.avatar}
           />
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { useTheme, Text } from 'react-native-paper';
-
+import i18n from '../../../i18n';
 import getStyles from '../../styles/profile';
 import logo from '../../../assets/icon.png';
 
@@ -11,7 +11,7 @@ export default function Profile() {
   return (
     <View>
       <Image style={styles.logo} source={logo} />
-      <Text style={styles.title}>User Profile!</Text>
+      <Text style={styles.title}>{i18n.t('drawer.profile')}</Text>
     </View>
   );
 }

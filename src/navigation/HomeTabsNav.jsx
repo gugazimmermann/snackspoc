@@ -27,8 +27,8 @@ export default function HomeTabsNav({ navigation }) {
       tabBarPosition='bottom'
       lazy
       tabBarOptions={{
-        activeTintColor: Colors.white,
-        inactiveTintColor: Colors.teal100,
+        activeTintColor: theme.colors.tabs.activeTintColor,
+        inactiveTintColor: theme.colors.tabs.inactiveTintColor,
         showIcon: true,
         showLabel: false,
         style: {

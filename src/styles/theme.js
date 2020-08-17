@@ -37,6 +37,10 @@ export default function mainTheme(themeStyle) {
       accent: Colors.orange900,
       positive: Colors.tealA700,
       negative: Colors.redA700,
+      tabs: {
+        activeTintColor: Colors.white,
+        inactiveTintColor: Colors.teal100,
+      },
     },
     fonts: configureFonts(fontConfig),
   };

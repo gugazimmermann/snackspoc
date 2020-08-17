@@ -32,14 +32,18 @@ export default function HomeNavigation() {
         }}
       />
       <Stack.Screen
-        name={i18n.t('navigation.profile')}
+        name='Profile'
         component={Profile}
-        options={{ headerTitle: i18n.t('navigation.profile') }}
+        options={{
+          title: i18n.t('navigation.profile'),
+        }}
       />
       <Stack.Screen
-        name={i18n.t('navigation.preferences')}
+        name='Preferences'
         component={Preferences}
-        options={{ headerTitle: i18n.t('navigation.preferences') }}
+        options={{
+          title: i18n.t('navigation.preferences'),
+        }}
       />
     </Stack.Navigator>
   );

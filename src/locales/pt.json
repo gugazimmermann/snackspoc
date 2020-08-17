@@ -23,9 +23,7 @@
     "backToSignIn": "Voltar"
   },
   "drawer": {
-    "searchingArea": "Área  de Busca",
-    "following": "Seguindo",
-    "followers": "Seguidores",
+    "searchingArea": "Área de Busca",
     "profile": "Perfil",
     "preferences": "Preferências",
     "marked": "Marcados",

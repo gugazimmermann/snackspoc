@@ -2,22 +2,29 @@ import { StyleSheet } from 'react-native';
 
 const getStyles = (theme) =>
   StyleSheet.create({
-    drawerContent: {
+    drawerSection: {
       flexGrow: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      padding: 16,
+      marginTop: 8,
     },
-    title: {
-      marginTop: 16,
+    userInfoSection: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      marginBottom: 8,
+    },
+    name: {
+      textAlign: 'center',
+      fontSize: 18,
       fontWeight: 'bold',
     },
-    caption: {
+    email: {
+      textAlign: 'center',
       fontSize: 14,
-      lineHeight: 14,
     },
     row: {
-      marginTop: 20,
+      marginTop: 8,
       flexDirection: 'row',
       alignItems: 'center',
     },
@@ -25,13 +32,6 @@ const getStyles = (theme) =>
       flexDirection: 'row',
       alignItems: 'center',
       marginRight: 15,
-    },
-    paragraph: {
-      fontWeight: 'bold',
-      marginRight: 3,
-    },
-    drawerSection: {
-      marginTop: 15,
     },
     preference: {
       flexDirection: 'row',

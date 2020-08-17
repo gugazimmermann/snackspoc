@@ -87,6 +87,7 @@ export default function AppNavigation({ toggleTheme, signOut }) {
 
   async function verifyCity(userChanged) {
     const city = await api.getCityByName(userChanged.city.long_name);
+    console.info(city);
     if (city === undefined) {
       setError({
         show: true,
